@@ -1,6 +1,9 @@
-name: 'export-env-action'
-description: 'Exports .env file variables to job env'
-author: 'cardinalby'
+name: 'export-mask-env-action'
+description: 'Exports .env file variables to job runner and masking sensitive variables.'
+author: 'datphan'
+branding:
+  icon: 'activity'
+  color: 'green'
 inputs:
   envFile:
     description: 'Path to .env file or Path to multiple .env files concatenated by `|`'
