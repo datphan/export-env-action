@@ -139,7 +139,7 @@ describe('export-env-action', () => {
                 export: 'true',
                 expand: 'true',
                 expandWithJobEnv: 'true',
-                mask: 'true'
+                mask: '.*'
             },
             env: {
                 JOBENV: 'abc'
@@ -187,7 +187,7 @@ describe('export-env-action', () => {
                 export: 'false',
                 expand: 'true',
                 expandWithJobEnv: 'true',
-                mask: 'true'
+                mask: 'AAA|BBB'
             },
             env: {
                 JOBENV: 'abc'
@@ -215,7 +215,7 @@ describe('export-env-action', () => {
                 export: 'true',
                 expand: 'true',
                 expandWithJobEnv: 'true',
-                mask: 'true'
+                mask: 'AAA|BBB'
             },
             env: {
                 JOBENV: 'abc'
@@ -243,7 +243,7 @@ describe('export-env-action', () => {
                 export: 'true',
                 expand: 'true',
                 expandWithJobEnv: 'true',
-                mask: 'true'
+                mask: 'AAA|BBB'
             },
             env: {
                 JOBENV: 'abc'

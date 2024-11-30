@@ -6,8 +6,15 @@ import * as core from "@actions/core";
 
 const DEFAULT_SEPARATOR = '|'
 
-function processValue(name: string, value: string) {
-    if (inputs.mask) {
+function processValue(name: string, value: string, maskVars: string[]) {
+    // if (inputs.mask) {
+    //     core.setSecret(value)
+    // }
+    const isSecret = maskVars.some(text => {
+        const re = getFilter(text);
+        return re.test(name);
+    });
+    if (isSecret) {
         core.setSecret(value)
     }
     if (inputs.export) {
@@ -29,9 +36,9 @@ function getVars(): dotenv.DotenvParseOutput {
     }), {})
 }
 
-function getFilter(): RegExp {
+function getFilter(text: string): RegExp {
     try {
-        return new RegExp(inputs.filter)
+        return new RegExp(text)
     } catch (err) {
         throw new Error("Invalid filter regex")
     }
@@ -42,13 +49,20 @@ export function runImpl() {
     if (inputs.expand || inputs.expandWithJobEnv) {
         vars = dotenvExpand.expand({parsed: vars, ignoreProcessEnv: !inputs.expandWithJobEnv}).parsed as dotenv.DotenvParseOutput
     }
+
+    let maskVars: string[] = [];
+    if (inputs.mask) {
+        maskVars = inputs.mask.split(DEFAULT_SEPARATOR);
+    }
     
     if (inputs.filter) {
-        const criteria = getFilter()
+        const criteria = getFilter(inputs.filter);
         Object.entries(vars).forEach(([name, value]) => {
-            if (criteria.test(name)) processValue(name, value)
+            if (criteria.test(name)) {
+                processValue(name, value, maskVars);
+            }
         })
     } else {
-        Object.entries(vars).forEach(e => processValue(e[0], e[1]))
+        Object.entries(vars).forEach(e => processValue(e[0], e[1], maskVars));
     }
 }

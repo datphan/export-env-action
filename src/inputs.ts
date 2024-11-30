@@ -21,7 +21,7 @@ export default {
         return core.getBooleanInput('export')
     },
 
-    get mask(): boolean {
-        return core.getBooleanInput('mask')
+    get mask(): string {
+        return core.getInput('mask')
     }
 }

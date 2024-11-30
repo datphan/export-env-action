@@ -199,8 +199,8 @@ outputs instead.
 
 <a name="inputs_mask"></a>
 
-### 🔹 `mask` Default: `false`
-If `true` [masks](https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#masking-a-value-in-log) all result values (after expanding) as secrets.
+### 🔹 `mask` Default: `MYSQL|KEY|TOKEN|PASSWORD|SECRET|SID|IDENTITY|AWS|GCP|CRYPTO|ENCRYPTION|ADDDRESS|IP|DATABASE|CERT`
+[Masks](https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#masking-a-value-in-log) all matched values (after expanding) as secrets.
 
 **Warning**: be cautious if you want to use this option, it is bad idea to store secrets in 
 `.env` file in the repo, use [GitHub secrets](https://docs.github.com/en/codespaces/managing-codespaces-for-your-organization/managing-encrypted-secrets-for-your-repository-and-organization-for-github-codespaces) for that purpose.
