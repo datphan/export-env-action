@@ -1,6 +1,6 @@
 name: 'export-mask-env-action'
 description: 'Exports .env file variables to job runner and masking sensitive variables.'
-author: 'datphan'
+author: 'cardinalby'
 branding:
   icon: 'activity'
   color: 'green'
